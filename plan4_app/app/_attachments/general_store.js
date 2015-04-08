@@ -3,7 +3,7 @@ var USERNAME = null;
 
 //Remote database address
 //var REMOTEDATABASE = "http://X.X.X.X/loreal_app";
-var REMOTEDATABASE = "http://127.0.0.1:5984/plan4_app";
+var REMOTEDATABASE = "http://46.108.11.13:5984/plan4_app";
 
 //Proxy for CouchDB
 webix.proxy.proxyCouchDB = {

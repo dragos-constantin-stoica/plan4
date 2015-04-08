@@ -6,19 +6,21 @@ var mainlayout = {
 		view:"toolbar",
 		id:"myToolbar",
 		cols:[
-			{ view:"button", id:"agenda", type:"iconButton", icon:"calendar", label:"Agenda", width:120, click:"agendaOnClick();" },
-			{ view:"button", id:"users", type:"iconButton", icon:"users", label:"Utilizatori", width:120, click:"usersOnClick();"},
-			{ view:"button", id:"outlets" , type:"iconButton", icon:"shopping-cart", label:"Magazine", width:120, click:"outletsOnClick();"},
-			{ view:"button", id:"activitymanagement", type:"iconButton", icon:"cogs", label:"Activitati", width:120, click:"activitymanagementOnClick();"},
+			{ view:"button", id:"subjects", type:"iconButton", icon:"book", label:"Discipline", width:120, click:"subjectsOnClick();" },
+			{ view:"button", id:"calendar", type:"iconButton", icon:"calendar", label:"Calendar", width:120, click:"calendarOnClick();"},
+			{ view:"button", id:"rooms" , type:"iconButton", icon:"building-o", label:"Sali", width:120, click:"roomsOnClick();"},
+			{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
+			{ view:"button", id:"hresources", type:"iconButton", icon:"user", label:"Personal", width:120, click:"hresourcesOnClick();"},
 			{ view:"button", id:"reports", type:"iconButton", icon:"tachometer", label:"Rapoarte", width:120 },
 			{ view:"button", id:"messages", type:"iconButton", icon:"envelope-o", label:"Mesaje", width:120, click:"messagesOnClick();"},
+			{ view:"button", id:"allocation", type:"iconButton", icon:"envelope-o", label:"Alocare Cursuri", width:120, click:"allocationOnClick();"},
 			{},
 			{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 		]
 	
 	},
-	
-	//main layout	
+
+	//main layout
 	getMainLayout: function () {
 		return {
 			id: "main",
@@ -36,44 +38,47 @@ var mainlayout = {
 				id:"mainpage",
 				cells:[
 				//Add planner by default --- dhtmlxScheduler initialization
-				//webix.copy(agenda.getAgenda())
+				//webix.copy(discipline.getdiscipline())
 				{template:"Aici vin widget-urile ..."}
 				]
 			}
 			]
 		};
-	},
-	
+	},	
+
 	getToolbar: function () {
 		return this.mytoolbar;
 	},
-	
+
 	setToolbar: function (role) {
-		if(role == 'roles_admin'){
+		if(role == 'admin'){
 			this.mytoolbar = {
 				view:"toolbar",
 				id:"myToolbar",
 				cols:[
-					{ view:"button", id:"agenda", type:"iconButton", icon:"calendar", label:"Agenda", width:120, click:"agendaOnClick();" },
-					{ view:"button", id:"users", type:"iconButton", icon:"users", label:"Utilizatori", width:120, click:"usersOnClick();"},
-					{ view:"button", id:"outlets" , type:"iconButton", icon:"shopping-cart", label:"Magazine", width:120, click:"outletsOnClick();"},
-					{ view:"button", id:"activitymanagement", type:"iconButton", icon:"cogs", label:"Activitati", width:120, click:"activitymanagementOnClick();"},
-					{ view:"button", id:"reports", type:"iconButton", icon:"tachometer", label:"Rapoarte", width:120, click:"reportsOnClick()" },
+					{ view:"button", id:"subjects", type:"iconButton", icon:"book", label:"Discipline", width:120, click:"subjectsOnClick();" },
+					{ view:"button", id:"calendar", type:"iconButton", icon:"calendar", label:"Calendar", width:120, click:"calendarOnClick();"},
+					{ view:"button", id:"rooms" , type:"iconButton", icon:"building-o", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
+					{ view:"button", id:"hresources", type:"iconButton", icon:"user", label:"Personal", width:120, click:"hresourcesOnClick();"},
+					{ view:"button", id:"reports", type:"iconButton", icon:"tachometer", label:"Rapoarte", width:120 },
 					{ view:"button", id:"messages", type:"iconButton", icon:"envelope-o", label:"Mesaje", width:120, click:"messagesOnClick();"},
+					{ view:"button", id:"allocation", type:"iconButton", icon:"envelope-o", label:"Alocare Cursuri", width:120, click:"allocationOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
-	
+			
 			};
 		};
-		if(role == 'roles_asm'){
+
+		if(role == 'sef_de_grupa'){
 			this.mytoolbar = {
 				view:"toolbar",
 				id:"myToolbar",
 				cols:[
-					{ view:"button", id:"agenda", type:"iconButton", icon:"calendar", label:"Agenda", width:120, click:"agendaOnClick();" },
-					{ view:"button", id:"users", type:"iconButton", icon:"users", label:"Utilizatori", width:120, click:"usersOnClick();"},
-					{ view:"button", id:"reports", type:"iconButton", icon:"tachometer", label:"Rapoarte", width:120, click:"reportsOnClick()" },
+					{ view:"button", id:"subjects", type:"iconButton", icon:"book", label:"Discipline", width:120, click:"subjectsOnClick();" },
+					{ view:"button", id:"calendar", type:"iconButton", icon:"calendar", label:"Calendar", width:120, click:"calendarOnClick();"},
+					{ view:"button", id:"rooms" , type:"iconButton", icon:"building-o", label:"Sali", width:120, click:"roomsOnClick();"},
 					{ view:"button", id:"messages", type:"iconButton", icon:"envelope-o", label:"Mesaje", width:120, click:"messagesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
@@ -81,70 +86,46 @@ var mainlayout = {
 	
 			};
 		}
-		if(role == 'roles_sr' || role =='roles_guest'){
+
+		if(role == 'student'){
 			this.mytoolbar = {
 				view:"toolbar",
 				id:"myToolbar",
 				cols:[
-					{ view:"button", id:"agenda", type:"iconButton", icon:"calendar", label:"Agenda", width:120, click:"agendaOnClick();" },
-					{ view:"button", id:"users", type:"iconButton", icon:"users", label:"Utilizatori", width:120, click:"usersOnClick();"},
-					{ view:"button", id:"reports", type:"iconButton", icon:"tachometer", label:"Rapoarte", width:120, click:"reportsOnClick()" },
-					{ view:"button", id:"messages", type:"iconButton", icon:"envelope-o", label:"Mesaje", width:120, click:"messagesOnClick();"},
+					{ view:"button", id:"subjects", type:"iconButton", icon:"book", label:"Discipline", width:120, click:"subjectsOnClick();" },
+					{ view:"button", id:"calendar", type:"iconButton", icon:"calendar", label:"Calendar", width:120, click:"calendarOnClick();"},
+	 				{ view:"button", id:"rooms" , type:"iconButton", icon:"building-o", label:"Sali", width:120, click:"roomsOnClick();"},
 					{},
-					//{ view:"toggle", id:"offline", type:"iconButton", name:"offline", offIcon:"refresh", onIcon:"cloud", offLabel:"GO OFFLINE", onLabel:"GO Online", width:120, click:"offlineOnClick();" },
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
-	
 			};
-		}	
+		}		
 	}
 };
 
-function usersOnClick () {
-	if(webix.isUndefined($$('usersview'))){
-		$$('mainpage').addView({id:"usersview", rows:[webix.copy(userstable.getUsersTable()),webix.copy(userstable.getUsersMenu())]});
-		$$('mainpage').resize(true);
-		$$('userstable').refresh();
-	}
-	$$('usersview').show();		
-};
-
-function outletsOnClick (){
-	if(webix.isUndefined($$('outletsview'))){
-		$$('mainpage').addView({id:"outletsview", rows:[webix.copy(outletstable.getOutletsTable()), webix.copy(outletsmenu)]});
-		$$('mainpage').resize(true);
-		//$$('outletstable').parse(outletstable.getOutletsData(), "json");
-		$$('outletstable').refresh();
-	};
-	$$('outletsview').show();
-};
-
-function activitymanagementOnClick () {
-	if(webix.isUndefined($$('activityview'))){
-		$$('mainpage').addView({id:"activityview", rows:[webix.copy(activitytable.getActivityTable()), webix.copy(activitymenu)]});
-		$$('mainpage').resize(true);
-		$$('activitytable').parse(activitytable.getFromularRaportSR());
-		$$('activitytable').refresh();
-	}
-	$$('activityview').show();
-};
-
-function agendaOnClick () {
-	//Planner is loaded by default, do not create a new instance and do not unload/destroy it
+function calendarOnClick () {
+	//Planner is loaded by default, do not create a new instance and do not unload/destroy it	
 	$$('planner').show();
-	//$$('planner').resize(true);
 };
 
-function messagesOnClick () {
-	if(webix.isUndefined($$('messageview'))){
-		$$('mainpage').addView({id:"messageview", rows:[webix.copy(messagelist.getMessageList()), webix.copy(messagemenu)]});
+function roomsOnClick (){
+	if(webix.isUndefined($$('roomsview'))){
+		$$('mainpage').addView({id:"roomsview", rows:[webix.copy(roomstable.getRoomsTable()), webix.copy(roomsmenu)]});
 		$$('mainpage').resize(true);
-		$$('messagelist').refresh();
-	}
-	$$('messageview').show();
-	$$('messagelist').data.attachEvent("onStoreUpdated", function(id, obj, mode){
-		if (mode == "update") get_message();
-	});
+		//$$('roomstable').parse(roomstable.getOutletsData(), "json");
+		$$('roomstable').refresh();
+	};
+	$$('roomsview').show();
+};
+
+function subjectsOnClick (){
+	if(webix.isUndefined($$('subjectsview'))){
+		$$('mainpage').addView({id:"subjectsview", rows:[webix.copy(subjectstable.getSubjectsTable()), webix.copy(subjectsmenu)]});
+		$$('mainpage').resize(true);
+		//$$('subjectstable').parse(subjectstable.getOutletsData(), "json");
+		$$('subjectstable').refresh();
+	};
+	$$('subjectsview').show();
 };
 
 function reportsOnClick () {
@@ -161,7 +142,9 @@ function reportsOnClick () {
 		if (!webix.isUndefined($$('reportsview'))) $$('reportsview').show();
 		$$('mainpage').resize(true);
 	}
-}
+};
+
+
 
 function logoutOnClick(){
 

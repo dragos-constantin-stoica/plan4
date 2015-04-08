@@ -1,93 +1,57 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
+	<head>
 		<meta charset="utf-8">
-		<!--
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		-->
-    <link rel="stylesheet" href="webix/codebase/webix.css" type="text/css">
+		<link rel="stylesheet" href="webix/codebase/webix.css" type="text/css">
 
-	<!-- CouchDB scripts -->
-	<script src="/_utils/script/json2.js" type="text/javascript"></script>
-    <script src="/_utils/script/sha1.js" type="text/javascript"></script>
-	<script src="/_utils/script/couch.js" type="text/javascript"></script>
-	<script src="/_utils/script/jquery.js" type="text/javascript"></script>
-    <script src="/_utils/script/jquery.couch.js" type="text/javascript"></script>
-    <script src="/_utils/script/jquery.dialog.js" type="text/javascript"></script>    
-	<!-- Webix scripts -->
-    <script src="webix/codebase/webix.js" type="text/javascript"></script> 
-	
-	<script type="text/javascript">
-		webix.require.disabled = true;
-		webix.codebase = "webix/components/scheduler/";
-	</script>
-	<!-- DHTMLX Scheduler component -->
-	<link rel="stylesheet" type="text/css" href="webix/components/scheduler/scheduler/dhtmlxscheduler.css">
-	<!--
-	<link rel="stylesheet" type="text/css" href="webix/components/scheduler/scheduler/common/dhtmlxCombo/dhtmlxcombo.css">
-	-->
-	<script src="webix/components/scheduler/scheduler.js"></script>
-	<script src="webix/components/scheduler/scheduler/dhtmlxscheduler.js"></script>
-	<!--
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_recurring.js" type="text/javascript"></script>
-	<script src='webix/components/scheduler/scheduler/ext/dhtmlxscheduler_minical.js' type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_editors.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_quick_info.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_readonly.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_limit.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_serialize.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_units.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_timeline.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_treetimeline.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_tooltip.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_week_agenda.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_year_view.js" type="text/javascript"></script>
-	<script src="webix/components/scheduler/scheduler/ext/dhtmlxscheduler_multisource.js"></script>
-	<script src="webix/components/scheduler/scheduler/locale/locale_ro.js" type="text/javascript" charset="utf-8"></script>
-	<script src="webix/components/scheduler/scheduler/locale/recurring/locale_recurring_ro.js" type="text/javascript" charset="utf-8"></script>
-	-->
-	<!--
-	<script src="webix/components/scheduler/scheduler/common/dhtmlxCombo/dhtmlxcombo.js" type="text/javascript"></script>
- 	-->
-	<!-- Debug purposes -->
+		<!-- CouchDB scripts -->
+		<script src="/_utils/script/json2.js" type="text/javascript"></script>
+	    <script src="/_utils/script/sha1.js" type="text/javascript"></script>
+		<script src="/_utils/script/couch.js" type="text/javascript"></script>
+		<script src="/_utils/script/jquery.js" type="text/javascript"></script>
+	    <script src="/_utils/script/jquery.couch.js" type="text/javascript"></script>
+	    <script src="/_utils/script/jquery.dialog.js" type="text/javascript"></script>    
+		<!-- Webix scripts -->
+	    <script src="webix/codebase/webix.js" type="text/javascript"></script> 
+		
+		<script type="text/javascript">
+			webix.require.disabled = true;
+			webix.codebase = "webix/components/scheduler/";
+		</script>
+		<!-- DHTMLX Scheduler component -->
+		<link rel="stylesheet" type="text/css" href="webix/components/scheduler/scheduler/dhtmlxscheduler.css">
+		<script src="webix/components/scheduler/scheduler.js"></script>
+		<script src="webix/components/scheduler/scheduler/dhtmlxscheduler.js"></script>
+
+		<!-- Debug purposes -->
 		<script src="general_store.js" type="text/javascript"></script>
 		<script src="common_aux.js" type="text/javascript"></script>
 
 		<script src="mainlayout.js" type="text/javascript"></script> 
 		<script src="logic.js" type="text/javascript"></script> 
 
-	<!--
-	<script src="activities.js" type="text/javascript"></script> 
-	-->
-	
+		<title>Plan de Învăţământ - Departamentul de Inginerie în Limbi Străine - Facultatea de Inginerie în Limbi Străine - Universitatea Politehnica Bucureşti</title>
 
-	<title>Plan de Învăţământ - Departamentul de Inginerie în Limbi Străine - Facultatea de Inginerie în Limbi Străine - Universitatea Politehnica Bucureşti</title>
-    </head>
-    <body>		
-		
-        <script type="text/javascript" charset="utf-8"> 
-		$.couch.urlPrefix = CouchDB.protocol + CouchDB.host;
-		REMOTEDATABASE = $.couch.urlPrefix + "/plan4_app";
-		/*
-		//use worker for CouchDB communication
-		var worker = new Worker('couchdb_utils.js');
-		worker.onmessage = function(e) {
-			console.log(e.data);
-		};
-		worker.postMessage({'cmd': 'start', 'msg': 'Lord Vader?'});
-		worker.postMessage({'cmd': 'setCouchDB_protocol', 'msg': CouchDB.protocol});
-		worker.postMessage({'cmd': 'setCouchDB_host', 'msg': CouchDB.host});
-		*/
-		//load application files
-		
-		//---------------------
-		//Main application loop	
-		webix.ready(function(){
-			//One page application
-			logic.init();		
-		});
-		//---------------------
-		
-        </script>
-    </body>
+	</head>
+
+	<body>
+
+		<script type="text/javascript" charset="utf-8">
+			$.couch.urlPrefix = CouchDB.protocol + CouchDB.host;
+			REMOTEDATABASE = $.couch.urlPrefix + "/plan4_app";
+
+			//---------------------
+			//Main application loop	
+			webix.ready(function(){
+				//One page application
+				logic.init();		
+			});
+			//---------------------
+
+		</script>
+
+
+
+
+	</body>
 </html>
