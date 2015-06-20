@@ -45,9 +45,10 @@ var logic = {
 			
 						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
 						//Get students
-						studentstable.setStudentsTable(role);
-						studentstable.setURL("proxyCouchDB->../users/_list/student_list/all_students?username="+USERNAME.username+"&roles="+role);
 						studentDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/student_data/all_students?username="+USERNAME.username+"&roles="+role);
+						studentstable.setURL("proxyCouchDB->../users/_list/student_list/all_students?username="+USERNAME.username+"&roles="+role);
+						studentstable.setStudentsTable(role);
+
 						studentDataStore.loadData(callback);
 					},	
 
@@ -55,9 +56,10 @@ var logic = {
 			
 						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
 						//Get professors
-						professorstable.setProfessorsTable(role);
-						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors?username="+USERNAME.username+"&roles="+role);
+						
 						professorDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/professor_data/all_professors?username="+USERNAME.username+"&roles="+role);
+						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors?username="+USERNAME.username+"&roles="+role);
+						professorstable.setProfessorsTable(role);
 						professorDataStore.loadData(callback);
 					},
 
@@ -65,9 +67,9 @@ var logic = {
 			
 						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
 						//Get rooms
-						roomstable.setRoomsTable(role);
-						roomstable.setURL("proxyCouchDB->../rooms/_list/room_list/all_rooms");
 						roomDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/rooms/_list/room_data/all_rooms");
+						roomstable.setURL("proxyCouchDB->../rooms/_list/room_list/all_rooms");
+						roomstable.setRoomsTable(role);
 						roomDataStore.loadData(callback);
 					}															
 
