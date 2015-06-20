@@ -1,4 +1,4 @@
-//check if user has session information in storage
+//check if user has session information in session storage
 var logic = {
 	init : function(){
 		USERNAME = webix.storage.session.get('USERNAME');
@@ -8,7 +8,7 @@ var logic = {
 			logic.login();
 		}
 	},
-				
+
 	init_data: function(){
 		//TODO - Get events for corresponding user(s)
 		//Get user document		
@@ -28,19 +28,66 @@ var logic = {
 				webix.storage.session.remove('USERNAME');
 				webix.storage.session.put('USERNAME', userdoc);	
 				USERNAME = webix.storage.session.get('USERNAME');
-				
+
 				//build user interface according to role(s)						
-				
-				var role = (USERNAME.roles[0] == 'admin'  ? 'admin':(USERNAME.roles[0] == 'resursa_umana' ? 'resursa_umana': ( USERNAME.roles[0] == 'sef_de_grupa' ? 'sef_de_grupa' :'guest')));
-				mainlayout.setToolbar(role);
-				logic.main();
-				webix.message(USERNAME.name + " " + USERNAME.surname + "<br/>Bine aţi venit în aplicaţia PLAN IV!");											
+				async.series([
+
+					function(callback){
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						mainlayout.setToolbar(role);
+
+						logic.main();
+						webix.message(USERNAME.name + " " + USERNAME.surname + "<br/>Bine aţi venit în aplicaţia PLAN IV!");							
+						callback(null,"interface init done!");	
+					},						
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						//Get students
+						studentstable.setStudentsTable(role);
+						studentstable.setURL("proxyCouchDB->../users/_list/student_list/all_students?username="+USERNAME.username+"&roles="+role);
+						studentDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/student_data/all_students?username="+USERNAME.username+"&roles="+role);
+						studentDataStore.loadData(callback);
+					},	
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						//Get professors
+						professorstable.setProfessorsTable(role);
+						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors?username="+USERNAME.username+"&roles="+role);
+						professorDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/professor_data/all_professors?username="+USERNAME.username+"&roles="+role);
+						professorDataStore.loadData(callback);
+					},
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						//Get rooms
+						roomstable.setRoomsTable(role);
+						roomstable.setURL("proxyCouchDB->../rooms/_list/room_list/all_rooms");
+						roomDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/rooms/_list/room_data/all_rooms");
+						roomDataStore.loadData(callback);
+					}															
+
+	
+															
+
+				],
+					// optional callback
+					function(err, results){
+						//console.log(results);
+						if(err) console.log("Error: " + err);
+					}				
+
+				);
 
 
 			}
+
 		);
-		logic.main();
-		webix.message(USERNAME.name + " " + USERNAME.surname + "<br/>Bine aţi venit în aplicaţia PLAN IV!");
+			
 	},
 
 	login: function	() {
@@ -59,7 +106,7 @@ var logic = {
 						else{						
 						    name = $$('email').getValue();
 						    password = $$('password').getValue();
-							    
+							   
 							webix.ajax(REMOTEDATABASE + "/_design/users/_view/login?key=[\""+ name  +"\", \"" + password + "\"]", 
 								function(couchdoc){
 

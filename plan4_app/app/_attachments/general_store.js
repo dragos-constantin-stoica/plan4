@@ -60,3 +60,135 @@ webix.proxy.proxyCouchDB = {
 		}
 	}
 };
+
+var studentDataStore = {
+	url: "",
+	studentData: [],
+
+	setURL: function(url){
+		studentDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(studentDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    studentDataStore.studentData = realdata.json();
+		    //console.log(userDataStore.userData);
+		    callback(null, studentDataStore.studentData);
+		}).fail(function(err){
+		    //error
+		    err.where = "studentData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - studentDataStore!"});
+		});
+	},
+
+	getStudentMenu: function(){
+		var result = ["ALL"];
+		for (var i = 0; i< studentDataStore.studentData.length; i++){	 
+				result.push(studentDataStore.studentData[i].username);
+		}
+		return result;	
+	},
+
+	getStudentList: function(){
+		var result = [];
+		for(var i = 0; i < studentDataStore.studentData.length; i ++){
+
+			result.push(studentDataStore.studentData[i]);	
+
+		}
+		return result;
+	}	
+
+
+};
+
+var professorDataStore = {
+	url: "",
+	professorData: [],
+
+	setURL: function(url){
+		professorDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(professorDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    professorDataStore.professorData = realdata.json();
+		    //console.log(userDataStore.userData);
+		    callback(null, professorDataStore.professorData);
+		}).fail(function(err){
+		    //error
+		    err.where = "professorData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - professorDataStore!"});
+		});
+	},
+
+	getProfessorMenu: function(){
+		var result = ["ALL"];
+		for (var i = 0; i< professorDataStore.professorData.length; i++){	 
+				result.push(professorDataStore.professorData[i].username);
+		}
+		return result;	
+	},
+
+	getProfessorList: function(){
+		var result = [];
+		for(var i = 0; i < professorDataStore.professorData.length; i ++){
+
+			result.push(professorDataStore.professorData[i]);	
+
+		}
+		return result;
+	}	
+
+
+};
+
+var roomDataStore = {
+	url: "",
+	roomData: [],
+
+	setURL: function(url){
+		roomDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(roomDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    roomDataStore.roomData = realdata.json();
+		    //console.log(userDataStore.userData);
+		    callback(null, roomDataStore.roomData);
+		}).fail(function(err){
+		    //error
+		    err.where = "roomData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - roomDataStore!"});
+		});
+	},
+
+	getRoomMenu: function(){
+		var result = ["ALL"];
+		for (var i = 0; i< roomDataStore.roomData.length; i++){	 
+				result.push(roomDataStore.roomData[i].username);
+		}
+		return result;	
+	},
+
+	getRoomList: function(){
+		var result = [];
+		for(var i = 0; i < roomDataStore.roomData.length; i ++){
+
+			result.push(roomDataStore.roomData[i]);	
+
+		}
+		return result;
+	}	
+
+
+};
