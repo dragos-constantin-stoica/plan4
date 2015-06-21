@@ -6,17 +6,18 @@ function (head, req) {
         var request = req.query;
         // we search for request.username and request.roles      
         while (row = getRow()) {
-            if(request.roles == "admin"){
+    
                 results.push({
                     _id: row.value._id,
                     _rev: row.value._rev,                	
                     name:row.value.name,
                     location:row.value.location,
                     associated_subjects:row.value.associated_subjects,
-                    facilities:row.value.facilities,
+                    nr_seats:row.value.nr_seats,
+                    nr_pcs:row.value.nr_pcs,
                     active:row.value.active
                 });
-            }
+            
 
         }
 

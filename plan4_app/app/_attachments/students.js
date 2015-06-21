@@ -73,13 +73,13 @@ var studentstable = {
 					{ id:"rol_student", header:"Rol Student", width:100, template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false },			
 					{ id:"active",      header:"Activ", width:55,  template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false }
 					],
-					on:{
-				        'onAfterAdd': addStudent,
-				        // 'onAfterEditStop': function(state, editor, ignoreUpdate){
-				        // 	studentstable.EDITSTOP = (editor.column != "boss_asm");
-				        // },
-				        'onDataUpdate': updateStudent
-				    },
+					// on:{
+				 //        //'onAfterAdd': addStudent,
+				 //        // 'onAfterEditStop': function(state, editor, ignoreUpdate){
+				 //        // 	studentstable.EDITSTOP = (editor.column != "boss_asm");
+				 //        // },
+				 //        'onDataUpdate': updateStudent
+				 //    },
 					drag:"row",
 					editable:true,
 					select:"row",
@@ -203,104 +203,104 @@ function new_student(){
 	}).show();
 };
 
-function addStudent (obj, index) {
+// function addStudent (obj, index) {
 
-	console.log("Add student start!");
+// 	console.log("Add student start!");
 
-	var FORCE_LOGOUT = false;
+// 	var FORCE_LOGOUT = false;
 
-	$$('studentstable').eachRow( 
-	    function (row){ 
-			var user_row = $$('studentstable').getItem(row);	
+// 	$$('studentstable').eachRow( 
+// 	    function (row){ 
+// 			var user_row = $$('studentstable').getItem(row);	
 
-			//create all users
-			if (user_row.username == $$('studentstable').getItem(obj).username){
+// 			//create all users
+// 			if (user_row.username == $$('studentstable').getItem(obj).username){
 
-				//new user
-				//create user document in databaase
-				if(!webix.isUndefined(user_row.password)){
-					var studentDoc = {
-						date_personale : {
-						    parola: user_row.password,
-						    nume_utilizator: user_row.username
-						},
-					    doctype : "student"
-					};
-					//create user in _users
-					$.couch.db("plan4_app").saveDoc(studentDoc, {
-						success: function(data) {
-						        console.log(data);
-						},
-						error: function(status) {
-								console.log(status);
-						}
-						});
-				}
-				//check for inactive user and log it out
-				FORCE_LOGOUT = !user_row.active;
-			};
+// 				//new user
+// 				//create user document in databaase
+// 				if(!webix.isUndefined(user_row.password)){
+// 					var studentDoc = {
+// 						date_personale : {
+// 						    parola: user_row.password,
+// 						    nume_utilizator: user_row.username
+// 						},
+// 					    doctype : "student"
+// 					};
+// 					//create user in _users
+// 					$.couch.db("plan4_app").saveDoc(studentDoc, {
+// 						success: function(data) {
+// 						        console.log(data);
+// 						},
+// 						error: function(status) {
+// 								console.log(status);
+// 						}
+// 						});
+// 				}
+// 				//check for inactive user and log it out
+// 				FORCE_LOGOUT = !user_row.active;
+// 			};
 			
-	    },
-		true
-	);
+// 	    },
+// 		true
+// 	);
 				
-	webix.message("Datele au fost salvate cu succes!");
-	console.log("Add user end!");
-	studentstable.EDITSTOP = true;
-	if(FORCE_LOGOUT){ 
-		logoutOnClick();
-	}
-}
+// 	webix.message("Datele au fost salvate cu succes!");
+// 	console.log("Add user end!");
+// 	studentstable.EDITSTOP = true;
+// 	if(FORCE_LOGOUT){ 
+// 		logoutOnClick();
+// 	}
+// }
 
-function updateStudent (id, obj, mode) {
-	if(!studentstable.EDITSTOP){
+// function updateStudent (id, obj, mode) {
+// 	if(!studentstable.EDITSTOP){
 
-		console.log("Update user start!");
+// 		console.log("Update user start!");
 
-		var FORCE_LOGOUT = false;
+// 		var FORCE_LOGOUT = false;
 
-		$$('studentstable').eachRow( 
-		    function (row){ 
-				var user_row = $$('studentstable').getItem(row);		
+// 		$$('studentstable').eachRow( 
+// 		    function (row){ 
+// 				var user_row = $$('studentstable').getItem(row);		
 	
 								
-				//update existing user				
-				//User auto/self deactivated 
-				if(!user_row.active && user_row.username == USERNAME.username) FORCE_LOGOUT = true;
+// 				//update existing user				
+// 				//User auto/self deactivated 
+// 				if(!user_row.active && user_row.username == USERNAME.username) FORCE_LOGOUT = true;
 				
 
-				//update _users with new password
-				if(!webix.isUndefined(user_row.password) && user_row.password.length > 0){
-					//user must login again
-					if(user_row.username == USERNAME.username) FORCE_LOGOUT = true;
-					var userDoc = {
-					    password: user_row.password,
-					    username: user_row.username,
-					    type: "user"
-					};
-					worker.postMessage({'cmd':'setPassword', 'msg':userDoc});
-				}
+// 				//update _users with new password
+// 				if(!webix.isUndefined(user_row.password) && user_row.password.length > 0){
+// 					//user must login again
+// 					if(user_row.username == USERNAME.username) FORCE_LOGOUT = true;
+// 					var userDoc = {
+// 					    password: user_row.password,
+// 					    username: user_row.username,
+// 					    type: "user"
+// 					};
+// 					worker.postMessage({'cmd':'setPassword', 'msg':userDoc});
+// 				}
 								
-		    },
-			true
-		);
+// 		    },
+// 			true
+// 		);
 
-		if(USERNAME.roles_admin)
-			worker.postMessage({'cmd': 'setSecurity', 'msg': security_obj});
+// 		if(USERNAME.roles_admin)
+// 			worker.postMessage({'cmd': 'setSecurity', 'msg': security_obj});
 
-		if(FORCE_LOGOUT){ 
-			logoutOnClick();
-			return;
-		}
+// 		if(FORCE_LOGOUT){ 
+// 			logoutOnClick();
+// 			return;
+// 		}
 
-		webix.message("Datele au fost salvate cu succes!");
-		console.log("Update user end!");
+// 		webix.message("Datele au fost salvate cu succes!");
+// 		console.log("Update user end!");
 
 
-	}else{
-		studentstable.EDITSTOP = !studentstable.EDITSTOP;
-	}
-}
+// 	}else{
+// 		studentstable.EDITSTOP = !studentstable.EDITSTOP;
+// 	}
+// }
 
 
 

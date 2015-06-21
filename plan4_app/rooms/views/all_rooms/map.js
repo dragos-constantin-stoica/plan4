@@ -9,7 +9,8 @@ function(doc) {
 			"name": doc.nume, 
 			"location":doc.locatie,
             "associated_subjects":doc.discipline_asociate,
-            "facilities": doc.dotari,       
+            "nr_seats": doc.dotari.nr_locuri,  
+            "nr_pcs" : doc.dotari.nr_pc,     
 			"active":doc.activ
 		}
 	);

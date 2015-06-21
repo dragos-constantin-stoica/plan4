@@ -6,24 +6,28 @@ function(doc, req){
             return [
 				{
 					'_id': req['uuid'],
-					'username':payload['username'], 
-					'name':payload['name'], 
-					'surname':payload['surname'],							
-					'rol_sef':payload['rol_sef'],
-					'rol_student':payload['rol_student'],
-					'active':payload['active'], 
+					'date_personale':{
+						'nume_utilizator':payload['username'], 
+						'nume':payload['name'], 
+						'prenume':payload['surname'],
+						'telefon':payload['telephone'],
+						'emails':payload['emails'],							
+						'rol_sef':payload['rol_sef'],
+						'rol_student':payload['rol_student']
+				    },
+					'activ':payload['active'], 
 					'doctype':'student'
-				}, JSON.stringify({"message":"Created"})]
+				}, JSON.stringify({"message":"Created"})];
         }
         // change nothing in database
-        return [null, JSON.stringify({"error":"Task not created!"})]
-    }
-	
-	doc['name'] = payload['name']; 
-	doc['surname'] = payload['surname'];
-	doc['rol_sef'] = payload['rol_sef'];
-	doc['rol_student'] = payload['rol_student'];
-	doc['active'] = payload['active'];
-	
-    return [doc, JSON.stringify({"message":"Saved"})]
+        return [null, JSON.stringify({"error":"Task not created!"})];
+    }	
+	doc['date_personale']['nume'] = payload['name']; 
+	doc['date_personale']['prenume'] = payload['surname'];
+	doc['date_personale']['rol_sef'] = payload['rol_sef'];
+	doc['date_personale']['rol_student'] = payload['rol_student'];
+	doc['date_personale']['telefon'] = payload['telephone'];
+	doc['date_personale']['emails'] = payload['emails'];
+ 	doc['activ'] = payload['active'];
+	return [doc, JSON.stringify({"message":"Saved"})];
 }

@@ -73,13 +73,13 @@ var professorstable = {
 					{ id:"rol_profesor", header:"Rol Profesor", width:100, template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false },		
 					{ id:"active",      header:"Activ", width:55,  template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false }
 					],
-					on:{
-				        'onAfterAdd': addStudent,
-				        // 'onAfterEditStop': function(state, editor, ignoreUpdate){
-				        // 	professorstable.EDITSTOP = (editor.column != "boss_asm");
-				        // },
-				        'onDataUpdate': updateStudent
-				    },
+					// on:{
+				 //        'onAfterAdd': addStudent,
+				 //        // 'onAfterEditStop': function(state, editor, ignoreUpdate){
+				 //        // 	professorstable.EDITSTOP = (editor.column != "boss_asm");
+				 //        // },
+				 //        'onDataUpdate': updateStudent
+				 //    },
 					drag:"row",
 					editable:true,
 					select:"row",
@@ -202,106 +202,4 @@ function new_professor(){
 		body:webix.copy(newprofessorform)
 	}).show();
 };
-
-function addStudent (obj, index) {
-
-	console.log("Add professor start!");
-
-	var FORCE_LOGOUT = false;
-
-	$$('professorstable').eachRow( 
-	    function (row){ 
-			var user_row = $$('professorstable').getItem(row);	
-
-			//create all users
-			if (user_row.username == $$('professorstable').getItem(obj).username){
-
-				//new user
-				//create user document in databaase
-				if(!webix.isUndefined(user_row.password)){
-					var professorDoc = {
-						cadru_didactic : {
-						    parola: user_row.password,
-						    nume_utilizator: user_row.username
-						},
-					    doctype : "professor"
-					};
-					//create user in database
-					$.couch.db("plan4_app").saveDoc(professorDoc, {
-						success: function(data) {
-						        console.log(data);
-						},
-						error: function(status) {
-								console.log(status);
-						}
-						});
-				}
-				//check for inactive user and log it out
-				FORCE_LOGOUT = !user_row.active;
-			};
-			
-	    },
-		true
-	);
-				
-	webix.message("Datele au fost salvate cu succes!");
-	console.log("Add user end!");
-	professorstable.EDITSTOP = true;
-	if(FORCE_LOGOUT){ 
-		logoutOnClick();
-	}
-}
-
-function updateStudent (id, obj, mode) {
-	if(!professorstable.EDITSTOP){
-
-		console.log("Update user start!");
-
-		var FORCE_LOGOUT = false;
-
-		$$('professorstable').eachRow( 
-		    function (row){ 
-				var user_row = $$('professorstable').getItem(row);		
-	
-								
-				//update existing user				
-				//User auto/self deactivated 
-				if(!user_row.active && user_row.username == USERNAME.username) FORCE_LOGOUT = true;
-				
-
-				//update _users with new password
-				if(!webix.isUndefined(user_row.password) && user_row.password.length > 0){
-					//user must login again
-					if(user_row.username == USERNAME.username) FORCE_LOGOUT = true;
-					var userDoc = {
-					    password: user_row.password,
-					    username: user_row.username,
-					    type: "user"
-					};
-					worker.postMessage({'cmd':'setPassword', 'msg':userDoc});
-				}
-								
-		    },
-			true
-		);
-
-		
-		if(USERNAME.roles_admin)
-			worker.postMessage({'cmd': 'setSecurity', 'msg': security_obj});
-
-		if(FORCE_LOGOUT){ 
-			logoutOnClick();
-			return;
-		}
-
-		webix.message("Datele au fost salvate cu succes!");
-		console.log("Update user end!");
-
-
-	}else{
-		professorstable.EDITSTOP = !professorstable.EDITSTOP;
-	}
-}
-
-
 

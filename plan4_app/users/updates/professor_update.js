@@ -6,24 +6,30 @@ function(doc, req){
             return [
 				{
 					'_id': req['uuid'],
-					'username':payload['username'], 
-					'name':payload['name'], 
-					'surname':payload['surname'],							
-					'rol_admin':payload['rol_admin'],
-					'rol_profesor':payload['rol_profesor'],
-					'active':payload['active'], 
-					'doctype':'student'
-				}, JSON.stringify({"message":"Created"})]
+					'cadru_didactic' : {
+						'nume_utilizator':payload['username'], 
+						'nume':payload['name'], 
+						'prenume':payload['surname'],
+						'telefon':payload['telephone'],
+						'emails':payload['emails'],															
+						'rol_admin':payload['rol_admin'],
+						'rol_profesor':payload['rol_profesor']
+					},
+					'activ':payload['active'], 
+					'doctype':'profesor'
+				}, JSON.stringify({"message":"Created"})];
         }
         // change nothing in database
-        return [null, JSON.stringify({"error":"Task not created!"})]
+        return [null, JSON.stringify({"error":"Task not created!"})];
     }
 	
-	doc['name'] = payload['name']; 
-	doc['surname'] = payload['surname'];
-	doc['rol_admin'] = payload['rol_admin'];
-	doc['rol_profesor'] = payload['rol_profesor'];
-	doc['active'] = payload['active'];
+	doc['cadru_didactic']['nume'] = payload['name']; 
+	doc['cadru_didactic']['prenume'] = payload['surname'];
+	doc['cadru_didactic']['telefon'] = payload['telephone'];
+	doc['cadru_didactic']['emails'] = payload['emails'];
+	doc['cadru_didactic']['rol_admin'] = payload['rol_admin'];
+	doc['cadru_didactic']['rol_profesor'] = payload['rol_profesor'];
+	doc['activ'] = payload['active'];
 	
-    return [doc, JSON.stringify({"message":"Saved"})]
+    return [doc, JSON.stringify({"message":"Saved"})];
 }

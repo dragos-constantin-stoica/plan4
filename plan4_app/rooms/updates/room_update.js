@@ -1,16 +1,19 @@
 function(doc, req){
     var payload = JSON.parse(req.body);
 	if (!doc){
-        if ('username' in payload){
+        if ('name' in payload && 'location' in payload){
             // create new document
             return [
 				{
-					'_id': req['uuid'],					' 
-					'name':payload['name'], 
-					'location':payload['location'],							
-					'associated_subjects':payload['associated_subjects'],
-					'facilities':payload['facilities'],
-					'active':payload['active'], 
+					'_id': req['uuid'],				 
+					'nume':payload['name'], 
+					'locatie':payload['location'],							
+					'discipline_asociate':payload['associated_subjects'],
+					'dotari' : {
+						'nr_locuri':payload['nr_seats'],
+						'nr_pc':payload['nr_pcs']
+					},
+					'activ':payload['active'], 
 					'doctype':'sala'
 				}, JSON.stringify({"message":"Created"})]
         }
@@ -18,10 +21,11 @@ function(doc, req){
         return [null, JSON.stringify({"error":"Task not created!"})]
     }
 	
-	doc['name'] = payload['name']; 
-	doc['location'] = payload['location'];
-	doc['associated_subjects'] = payload['associated_subjects'];
-	doc['facilities'] = payload['facilities'];
+	doc['nume'] = payload['name']; 
+	doc['locatie'] = payload['location'];
+	doc['discipline_asociate'] = payload['associated_subjects'];
+	doc['dotari']['nr_locuri'] = payload['nr_seats'];
+	doc['dotari']['nr_pc'] = payload['nr_pcs'];	
 	doc['active'] = payload['active'];
 	
     return [doc, JSON.stringify({"message":"Saved"})]

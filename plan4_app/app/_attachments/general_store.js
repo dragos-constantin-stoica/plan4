@@ -175,7 +175,7 @@ var roomDataStore = {
 	getRoomMenu: function(){
 		var result = ["ALL"];
 		for (var i = 0; i< roomDataStore.roomData.length; i++){	 
-				result.push(roomDataStore.roomData[i].username);
+				result.push(roomDataStore.roomData[i].name);
 		}
 		return result;	
 	},
