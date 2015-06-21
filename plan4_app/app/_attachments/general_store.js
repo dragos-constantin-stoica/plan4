@@ -192,3 +192,47 @@ var roomDataStore = {
 
 
 };
+
+var secretaryDataStore = {
+	url: "",
+	secretaryData: [],
+
+	setURL: function(url){
+		secretaryDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(secretaryDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    secretaryDataStore.secretaryData = realdata.json();
+		    //console.log(userDataStore.userData);
+		    callback(null, secretaryDataStore.secretaryData);
+		}).fail(function(err){
+		    //error
+		    err.where = "secretaryData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - secretaryDataStore!"});
+		});
+	},
+
+	getSecretaryMenu: function(){
+		var result = ["ALL"];
+		for (var i = 0; i< secretaryDataStore.secretaryData.length; i++){	 
+				result.push(secretaryDataStore.secretaryData[i].username);
+		}
+		return result;	
+	},
+
+	getSecretaryList: function(){
+		var result = [];
+		for(var i = 0; i < secretaryDataStore.secretaryData.length; i ++){
+
+			result.push(secretaryDataStore.secretaryData[i]);	
+
+		}
+		return result;
+	}	
+
+
+};

@@ -9,6 +9,7 @@ var mainlayout = {
 
 			{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 			{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
+			{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 			{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
 
 
@@ -57,6 +58,7 @@ var mainlayout = {
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -73,6 +75,7 @@ var mainlayout = {
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -88,6 +91,7 @@ var mainlayout = {
 
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -103,6 +107,7 @@ var mainlayout = {
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -120,6 +125,7 @@ var mainlayout = {
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -158,6 +164,15 @@ function roomsOnClick(){
 		$$('roomstable').refresh();
 	}
 	$$('roomsview').show();		
+};
+
+function secretariesOnClick () {
+	if(webix.isUndefined($$('secretariesview'))){
+		$$('mainpage').addView({id:"secretariesview", rows:[webix.copy(secretariestable.getSecretariesTable()),webix.copy(secretariestable.getSecretariesMenu())]});
+		$$('mainpage').resize(true);
+		$$('secretariestable').refresh();
+	}
+	$$('secretariesview').show();		
 };
 
 

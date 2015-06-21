@@ -71,7 +71,17 @@ var logic = {
 						roomstable.setURL("proxyCouchDB->../rooms/_list/room_list/all_rooms");
 						roomstable.setRoomsTable(role);
 						roomDataStore.loadData(callback);
-					}															
+					},
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						//Get rooms
+						secretaryDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/secretaries/_list/secretary_data/all_secretaries?username="+USERNAME.username+"&roles="+role);
+						secretariestable.setURL("proxyCouchDB->../secretaries/_list/secretary_list/all_secretaries?username="+USERNAME.username+"&roles="+role);
+						secretariestable.setSecretariesTable(role);
+						secretaryDataStore.loadData(callback);
+					}																
 
 	
 															
