@@ -113,8 +113,8 @@ var studentstable = {
 
 
 //password form	
-var newpasswordform = {
-	id: "newpasswordform",			
+var newstudentpasswordform = {
+	id: "newstudentpasswordform",			
 	view:"form", 
 	width:400,
 
@@ -132,7 +132,7 @@ var newpasswordform = {
 				$$('studentstable').updateItem(sel.row, row);
 
 				$$('new_student').hide();
-				$$('newpasswordform').destructor();						
+				$$('newstudentpasswordform').destructor();						
 				$$('new_student').destructor();
 				webix.message({text:"Parola a fost schimbată!<br/>Salvaţi datele!"});						
 			}
@@ -152,7 +152,7 @@ function password_student(){
 			width:400,
 			position:"top",
 			head:"Parola nouă!",
-			body:webix.copy(newpasswordform)
+			body:webix.copy(newstudentpasswordform)
 		}).show();
 	}else{
 		webix.message({type:"error",text:"Selectaţi un student!"});

@@ -53,7 +53,7 @@ var professorstable = {
 	},
 
 
-	setProfessorsTable:function (role) {
+	setProfessorsTable:function (role,departmentlist) {
 		if(role == 'admin'){
 			this.layout = {
 					view:"treetable",
@@ -69,6 +69,7 @@ var professorstable = {
 					{ id:"surname",  header: ["Nume",{content:"textFilter"}], editor:"text", width:200},
 					{ id:"telephone",header:["Numar Telefon",{content:"textFilter"}], editor:"text", width:200},
 					{ id:"emails",     header:["E-mail",{content:"textFilter"}], editor:"text", width:200},
+					{ id:"department", header:["Departament", {content:"selectFilter"}], editor:"select", editValue:"value", options:departmentlist, width:300},
 					{ id:"rol_admin", header:"Rol Admin", width:100, template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false },
 					{ id:"rol_profesor", header:"Rol Profesor", width:100, template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false },		
 					{ id:"active",      header:"Activ", width:55,  template:"{common.checkbox()}", editor:"checkbox", checkValue:true, uncheckValue:false }
@@ -113,8 +114,8 @@ var professorstable = {
 
 
 //password form	
-var newpasswordform = {
-	id: "newpasswordform",			
+var newprofessorpasswordform = {
+	id: "newprofessorpasswordform",			
 	view:"form", 
 	width:400,
 
@@ -132,7 +133,7 @@ var newpasswordform = {
 				$$('professorstable').updateItem(sel.row, row);
 
 				$$('new_professor').hide();
-				$$('newpasswordform').destructor();						
+				$$('newprofessorpasswordform').destructor();						
 				$$('new_professor').destructor();
 				webix.message({text:"Parola a fost schimbată!<br/>Salvaţi datele!"});						
 			}
@@ -152,7 +153,7 @@ function password_professor(){
 			width:400,
 			position:"top",
 			head:"Parola nouă!",
-			body:webix.copy(newpasswordform)
+			body:webix.copy(newprofessorpasswordform)
 		}).show();
 	}else{
 		webix.message({type:"error",text:"Selectaţi un profesor!"});

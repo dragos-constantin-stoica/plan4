@@ -236,3 +236,43 @@ var secretaryDataStore = {
 
 
 };
+
+var departmentDataStore = {
+	url:"",
+	departmentData: [],
+
+	cleanUp: function(){
+		departmentDataStore.url = "";
+		departmentDataStore.departmentData = [];
+	},
+
+	setURL: function(url){
+		departmentDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(departmentDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    departmentDataStore.departmentData = realdata.json();
+		    //console.log(departmentDataStore.departmentData);
+		    callback(null,departmentDataStore.departmentData);
+		}).fail(function(err){
+		    //error
+		    err.where = "departmentData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - departmentsDataStore!"});
+		});
+	},
+
+
+
+	getDepartmentList: function(){
+		var result = [];
+		for (var i = 0 ; i < departmentDataStore.departmentData.length ; i++) {
+			result.push(departmentDataStore.departmentData[i]);
+		};
+		return result;
+	}
+
+};

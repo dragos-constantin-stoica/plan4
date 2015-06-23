@@ -113,8 +113,8 @@ var secretariestable = {
 
 
 //password form	
-var newpasswordform = {
-	id: "newpasswordform",			
+var newsecretarypasswordform = {
+	id: "newsecretarypasswordform",			
 	view:"form", 
 	width:400,
 
@@ -132,7 +132,7 @@ var newpasswordform = {
 				$$('secretariestable').updateItem(sel.row, row);
 
 				$$('new_secretary').hide();
-				$$('newpasswordform').destructor();						
+				$$('newsecretarypasswordform').destructor();						
 				$$('new_secretary').destructor();
 				webix.message({text:"Parola a fost schimbată!<br/>Salvaţi datele!"});						
 			}
@@ -152,7 +152,7 @@ function password_secretary(){
 			width:400,
 			position:"top",
 			head:"Parola nouă!",
-			body:webix.copy(newpasswordform)
+			body:webix.copy(newsecretarypasswordform)
 		}).show();
 	}else{
 		webix.message({type:"error",text:"Selectaţi o secretara!"});

@@ -11,7 +11,8 @@ function(doc, req){
 						'nume':payload['name'], 
 						'prenume':payload['surname'],
 						'telefon':payload['telephone'],
-						'emails':payload['emails'],							
+						'emails':payload['emails'],	
+						'parola':payload['password'],						
 						'rol_sef':payload['rol_sef'],
 						'rol_student':payload['rol_student']
 				    },
@@ -28,6 +29,7 @@ function(doc, req){
 	doc['date_personale']['rol_student'] = payload['rol_student'];
 	doc['date_personale']['telefon'] = payload['telephone'];
 	doc['date_personale']['emails'] = payload['emails'];
+	doc['date_personale']['parola'] = payload['password'];
  	doc['activ'] = payload['active'];
 	return [doc, JSON.stringify({"message":"Saved"})];
 }

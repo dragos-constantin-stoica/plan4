@@ -11,9 +11,11 @@ function(doc, req){
 						'nume':payload['name'], 
 						'prenume':payload['surname'],
 						'telefon':payload['telephone'],
-						'emails':payload['emails'],															
+						'emails':payload['emails'],
+						'parola':payload['password'],															
 						'rol_admin':payload['rol_admin'],
 						'rol_profesor':payload['rol_profesor']
+						
 					},
 					'activ':payload['active'], 
 					'doctype':'profesor'
@@ -29,6 +31,8 @@ function(doc, req){
 	doc['cadru_didactic']['emails'] = payload['emails'];
 	doc['cadru_didactic']['rol_admin'] = payload['rol_admin'];
 	doc['cadru_didactic']['rol_profesor'] = payload['rol_profesor'];
+	doc['cadru_didactic']['parola'] = payload['password'];
+	doc['cadru_didactic']['departament'] = payload['department'];
 	doc['activ'] = payload['active'];
 	
     return [doc, JSON.stringify({"message":"Saved"})];

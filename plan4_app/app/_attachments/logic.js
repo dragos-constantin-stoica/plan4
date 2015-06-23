@@ -51,6 +51,14 @@ var logic = {
 
 						studentDataStore.loadData(callback);
 					},	
+					
+
+					function(callback){
+						departmentDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/departments/_list/department_list/all_departments");
+						departmentDataStore.loadData(callback);
+
+
+					},	
 
 					function(callback){
 			
@@ -59,7 +67,7 @@ var logic = {
 						
 						professorDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/professor_data/all_professors?username="+USERNAME.username+"&roles="+role);
 						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors?username="+USERNAME.username+"&roles="+role);
-						professorstable.setProfessorsTable(role);
+						professorstable.setProfessorsTable(role, departmentDataStore.getDepartmentList());
 						professorDataStore.loadData(callback);
 					},
 
@@ -77,11 +85,11 @@ var logic = {
 			
 						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
 						//Get rooms
-						secretaryDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/secretaries/_list/secretary_data/all_secretaries?username="+USERNAME.username+"&roles="+role);
-						secretariestable.setURL("proxyCouchDB->../secretaries/_list/secretary_list/all_secretaries?username="+USERNAME.username+"&roles="+role);
+						secretaryDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/secretary_data/all_secretaries?username="+USERNAME.username+"&roles="+role);
+						secretariestable.setURL("proxyCouchDB->../users/_list/secretary_list/all_secretaries?username="+USERNAME.username+"&roles="+role);
 						secretariestable.setSecretariesTable(role);
 						secretaryDataStore.loadData(callback);
-					}																
+					}																				
 
 	
 															
