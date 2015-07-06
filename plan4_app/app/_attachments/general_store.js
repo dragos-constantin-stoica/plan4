@@ -2,7 +2,7 @@
 var USERNAME = null;
 
 //Remote database address
-//var REMOTEDATABASE = "http://X.X.X.X/loreal_app";
+
 var REMOTEDATABASE = "http://46.108.11.13:5984/plan4_app";
 
 //Proxy for CouchDB
@@ -144,8 +144,44 @@ var professorDataStore = {
 
 		}
 		return result;
-	}	
+	},	
 
+	getProfessorNames: function(){
+		var result = [];
+		for(var i = 0; i < professorDataStore.professorData.length; i ++){
+
+			result.push(professorDataStore.professorData[i].name + " " + professorDataStore.professorData[i].surname );	
+
+		}
+		return result;
+	},
+
+	getProfessorByName: function(name){
+		var result = {};
+
+		for(var i = 0; i < professorDataStore.professorData.length; i ++){
+			var fullname = professorDataStore.professorData[i].name + " " + professorDataStore.professorData[i].surname;
+			if( fullname == name){
+
+				result = {
+					"degree" : professorDataStore.professorData[i].grad_didactic,
+					"title" : professorDataStore.professorData[i].titlu_stiintific,
+					"emails" : professorDataStore.professorData[i].emails,
+					"telephone" : professorDataStore.professorData[i].telephone,
+					"department" : professorDataStore.professorData[i].department,
+					"faculty" : professorDataStore.professorData[i].faculty
+
+				};	
+
+
+			}
+
+
+		}
+		return result;
+
+
+	}	
 
 };
 
@@ -276,3 +312,161 @@ var departmentDataStore = {
 	}
 
 };
+
+var courseDataStore = {
+	url: "",
+	courseData: [],
+
+	setURL: function(url){
+		courseDataStore.url = url;
+	},
+	
+	loadData: function(callback){
+		var promise = webix.ajax().get(courseDataStore.url);
+		promise.then(function(realdata){
+		    //success
+		    courseDataStore.courseData = realdata.json();
+		    //console.log(userDataStore.userData);
+		    callback(null, courseDataStore.courseData);
+		}).fail(function(err){
+		    //error
+		    err.where = "courseData";
+		    callback(err,null);
+		    webix.message({type:"error", text:"Datele nu au fost încărcate corect - courseDataStore!"});
+		});
+	},
+
+	getCourseMenu: function(){
+		var result = ["ALL"];
+		for (var i = 0; i< courseDataStore.courseData.length; i++){	 
+				result.push(courseDataStore.courseData[i].name);
+		}
+		return result;	
+	},
+
+	getCourseList: function(){
+		var result = [];
+		for(var i = 0; i < courseDataStore.courseData.length; i ++){
+
+			result.push(courseDataStore.courseData[i]);	
+
+		}
+		return result;
+	},
+
+	getCoursesPIV:function(faculty,specialization){
+		
+		
+		var total_course_hours = [0,0,0,0,0,0,0,0];
+		var total_seminar_hours = [0,0,0,0,0,0,0,0];
+		var total_lab_hours = [0,0,0,0,0,0,0,0];
+		var total_project_hours = [0,0,0,0,0,0,0,0];
+		var total_teaching_hours=[0,0,0,0,0,0,0,0];
+		var total_etcs = [0,0,0,0,0,0,0,0];
+		var total_individual_hours = [0,0,0,0,0,0,0,0];
+
+	
+		var results_by_semester = [			
+			{"sem":"1", "data":[['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"2","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"3","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"4","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"5","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"6","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"7","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]},
+			{"sem":"8","data": [['Cod', 'Denumire Curs', 'Denumire Ro', 'Titular', 'Grad did.', "","Ver","C","S","L","P","ECTS","Ore did.", "Std. ind","E-mail","Telefon","Departament","Facultate"]]}
+		];
+		
+
+
+			
+
+		for (var i = 0; i < courseDataStore.courseData.length;i++){
+			if(courseDataStore.courseData[i].faculty == faculty &&
+			   courseDataStore.courseData[i].specialization == specialization &&
+			   courseDataStore.courseData[i].allocated){
+
+			
+			   
+			   var semester = parseInt(courseDataStore.courseData[i].semester);
+			   var professor = professorDataStore.getProfessorByName(courseDataStore.courseData[i].holder);
+			   var course_hours = parseInt(courseDataStore.courseData[i].course_hours_allocated);
+			   total_course_hours[semester-1] += course_hours;
+			   var seminar_hours = parseInt(courseDataStore.courseData[i].seminar_hours_allocated);
+			   total_seminar_hours[semester-1] += seminar_hours;
+			   var lab_hours = parseInt(courseDataStore.courseData[i].lab_hours_allocated);
+			   total_lab_hours[semester-1] += lab_hours;
+			   var project_hours = parseInt(courseDataStore.courseData[i].project_hours_allocated);
+			   total_project_hours[semester-1] += project_hours;
+			   var ects = parseInt(courseDataStore.courseData[i].credit_nr);
+			   total_etcs[semester-1] += ects;
+			   var teaching_hours = (course_hours + seminar_hours + lab_hours + project_hours ) * 14;
+			   total_teaching_hours[semester-1] += teaching_hours; 
+			   var individual_hours = parseInt(courseDataStore.courseData[i].individual_hours);
+			   total_individual_hours[semester-1] += individual_hours;
+
+				results_by_semester[semester-1].data.push([
+
+					courseDataStore.courseData[i].course_code,
+					courseDataStore.courseData[i].name,
+					courseDataStore.courseData[i].name_ro,
+					courseDataStore.courseData[i].holder,
+					professor.degree,
+					professor.title,					
+					courseDataStore.courseData[i].verification,
+					courseDataStore.courseData[i].course_hours_allocated,
+					courseDataStore.courseData[i].seminar_hours_allocated,
+					courseDataStore.courseData[i].lab_hours_allocated,
+					courseDataStore.courseData[i].project_hours_allocated,
+					courseDataStore.courseData[i].credit_nr,
+					teaching_hours.toString(),
+					courseDataStore.courseData[i].individual_hours,
+					professor.emails,
+					professor.telephone,
+					professor.department,
+					professor.faculty
+				
+				]);
+
+
+			}
+		}
+
+		for(var i=0;i<8;i++){
+		results_by_semester[i].data.push([
+			' ', ' ', ' ',' ',
+			'Total',
+			' ',' ',
+			total_course_hours[i].toString(),
+			total_seminar_hours[i].toString(),
+			total_lab_hours[i].toString(),
+			total_project_hours[i].toString(),
+			total_etcs[i].toString(),
+			total_teaching_hours[i].toString(),
+			total_individual_hours[i].toString(),
+			' ',' ',' ',' '
+			]);
+		}
+
+		return results_by_semester;
+
+	}
+
+
+	// getCoursesST(faculty,department){
+
+
+
+
+
+
+
+
+
+
+
+	// }	
+
+
+};
+

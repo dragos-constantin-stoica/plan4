@@ -6,7 +6,8 @@ function(doc) {
 		{
 			"_id": doc._id,
 			"_rev": doc._rev,
-			"username":doc.date_personale.nume_utilizator, 
+			"username":doc.date_personale.nume_utilizator,
+			"password":doc.date_personale.parola, 
 			"name": doc.date_personale.nume, 
 			"surname":doc.date_personale.prenume,
             "telephone":doc.date_personale.telefon,

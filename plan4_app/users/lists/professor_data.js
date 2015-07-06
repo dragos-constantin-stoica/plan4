@@ -9,10 +9,15 @@ function (head, req) {
             if(request.roles == "admin"){
                 results.push({
                     username:row.value.username,
+                    grad_didactic:row.value.grad_didactic,
+                    titlu_stiintific:row.value.titlu_stiintific,
                     name:row.value.name,
+                    password:row.value.password,
                     surname:row.value.surname,
                     telephone:row.value.telephone,
-                    emails:row.value.emails,                    
+                    emails:row.value.emails,
+                    faculty:row.value.faculty,
+                    department:row.value.department,                      
                     rol_admin:row.value.rol_admin,
                     rol_profesor:row.value.rol_profesor,
                     active:row.value.active

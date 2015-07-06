@@ -11,6 +11,7 @@ function (head, req) {
                     username:row.value.username,
                     name:row.value.name,
                     surname:row.value.surname,
+                    password:row.value.password,
                     telephone:row.value.telephone,
                     emails:row.value.emails,                    
                     rol_admin:row.value.rol_admin,

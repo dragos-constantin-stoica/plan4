@@ -65,8 +65,8 @@ var logic = {
 						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
 						//Get professors
 						
-						professorDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/professor_data/all_professors?username="+USERNAME.username+"&roles="+role);
-						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors?username="+USERNAME.username+"&roles="+role);
+						professorDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/users/_list/professor_data/all_professors_externals?username="+USERNAME.username+"&roles="+role);
+						professorstable.setURL("proxyCouchDB->../users/_list/professor_list/all_professors_externals?username="+USERNAME.username+"&roles="+role);
 						professorstable.setProfessorsTable(role, departmentDataStore.getDepartmentList());
 						professorDataStore.loadData(callback);
 					},
@@ -89,9 +89,31 @@ var logic = {
 						secretariestable.setURL("proxyCouchDB->../users/_list/secretary_list/all_secretaries?username="+USERNAME.username+"&roles="+role);
 						secretariestable.setSecretariesTable(role);
 						secretaryDataStore.loadData(callback);
-					}																				
+					},
 
-	
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));
+						
+						courseDataStore.setURL(CouchDB.protocol + CouchDB.host + "/plan4_app/_design/courses/_list/course_data/all_courses");
+						coursestable.setURL("proxyCouchDB->../courses/_list/course_list/all_courses");
+						
+						coursestable.setCoursesTable(role,professorDataStore.getProfessorNames());
+					//	courseallocationform.setProfessorNames(professorDataStore.getProfessorNames());
+						
+						courseDataStore.loadData(callback);
+
+					},	
+
+					function(callback){
+			
+						var role = (USERNAME.rol_admin ? 'admin':(USERNAME.rol_student ? 'student' : ( USERNAME.rol_sef ? 'sef_de_grupa' : (USERNAME.rol_profesor ? 'profesor' : 'secretara'))));			
+						reportstable.setReportsTable(role);
+						
+					}																					
+
+											
 															
 
 				],

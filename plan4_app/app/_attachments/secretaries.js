@@ -36,7 +36,7 @@ var secretariestable = {
 		    id:"secretariestoolbar",
 		    cols:[
 				{ view:"button", id:"passwordsecretary",    type:"iconButton", icon:"key",    label:"Schimbă parola", width:150, click:"password_secretary();" },
-				{ view:"button", id:"newsecretary",    type:"iconButton", icon:"plus",    label:"secretary nou", width:150, click:"new_secretary();" }
+				{ view:"button", id:"newsecretary",    type:"iconButton", icon:"plus",    label:"Secretara noua", width:150, click:"new_secretary();" }
 			]
 	},	
 
@@ -92,7 +92,7 @@ var secretariestable = {
 			    id:"secretariestoolbar",
 			    cols:[
 					{ view:"button", id:"passwordsecretary",    type:"iconButton", icon:"key",    label:"Schimbă parola", width:150, click:"password_secretary();" },
-					{ view:"button", id:"newsecretary",    type:"iconButton", icon:"plus",    label:"secretary nou", width:150, click:"new_secretary();" }
+					{ view:"button", id:"newsecretary",    type:"iconButton", icon:"plus",    label:"Secretara noua", width:150, click:"new_secretary();" }
 
 				]
 			};
@@ -169,7 +169,7 @@ var newsecretaryform = {
 	},
 		{ view:"text", type:"email", label:"Email", name:"newemail", placeholder:"secretara@pub.ro", value:""},
 		{ view:"text", type:'password', label:"Parola", name:"newpassword", value:""},
-		{ view:"button", label:"secretary NOU!" , type:"form", click:function(){
+		{ view:"button", label:"Secretara NOUA!" , type:"form", click:function(){
 			if (! this.getParentView().validate())
 				webix.message({ type:"error", text:"E-mail sau parola nu sunt valide!" });
 			else{

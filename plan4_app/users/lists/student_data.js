@@ -12,6 +12,7 @@ function (head, req) {
                     name:row.value.name,
                     surname:row.value.surname,
                     telephone:row.value.telephone,
+                    password:row.value.password,
                     emails:row.value.emails,                    
                     rol_sef:row.value.rol_sef,
                     rol_student:row.value.rol_student,

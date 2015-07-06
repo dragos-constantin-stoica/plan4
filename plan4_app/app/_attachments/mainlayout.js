@@ -10,9 +10,9 @@ var mainlayout = {
 			{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 			{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 			{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
-			{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
-
-
+			{ view:"button", id:"rooms", type:"iconButton", icon:"university", label:"Sali", width:120, click:"roomsOnClick();"},
+			{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},
+   			{ view:"button",id:"reports", type:"iconButton", icon:"file-pdf-o",label:"Rapoarte", width:120, click:"reportsOnClick();"},
 			{},
 			{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 		]
@@ -56,9 +56,11 @@ var mainlayout = {
 				id:"myToolbar",
 				cols:[
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
-					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
-					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},					
 					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
+					{ view:"button", id:"rooms", type:"iconButton", icon:"university", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},
+   					{ view:"button", id:"reports", type:"iconButton", icon:"file-pdf-o",label:"Rapoarte", width:120, click:"reportsOnClick();"},										
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -73,9 +75,10 @@ var mainlayout = {
 				cols:[
 
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
-					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
-					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},					
 					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
+					{ view:"button", id:"rooms", type:"iconButton", icon:"university", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},					
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -92,6 +95,7 @@ var mainlayout = {
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
 					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
 					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
+					{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -105,9 +109,11 @@ var mainlayout = {
 				cols:[
 
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
-					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
-					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
-					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
+					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},					
+					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},					
+					{ view:"button", id:"rooms", type:"iconButton", icon:"university", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},	
+   					{view:"button",id:"reports", type:"iconButton", icon:"file-pdf-o",label:"Rapoarte", width:120, click:"reportsOnClick();"},									
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -123,9 +129,11 @@ var mainlayout = {
 				cols:[
 
 					{ view:"button", id:"students" , type:"iconButton", icon:"child", label:"Studenti", width:120, click:"studentsOnClick();"},
-					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},
-					{ view:"button", id:"rooms", type:"iconButton", icon:"house", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"professors", type:"iconButton", icon:"user", label:"Profesori", width:120, click:"professorsOnClick();"},					
 					{ view:"button", id:"secretaries", type:"iconButton", icon:"user", label:"Secretare", width:120, click:"secretariesOnClick();"},
+					{ view:"button", id:"rooms", type:"iconButton", icon:"university", label:"Sali", width:120, click:"roomsOnClick();"},
+					{ view:"button", id:"courses", type:"iconButton", icon:"book", label:"Cursuri", width:120, click:"coursesOnClick();"},	
+   					{view:"button",id:"reports", type:"iconButton", icon:"file-pdf-o",label:"Rapoarte", width:120, click:"reportsOnClick();"},									
 					{},
 					{ view:"button", id:"logout",type:"iconButton", icon:"sign-out", label:"Logout", width:120, click:"logoutOnClick();"}
 				]
@@ -173,6 +181,24 @@ function secretariesOnClick () {
 		$$('secretariestable').refresh();
 	}
 	$$('secretariesview').show();		
+};
+
+function coursesOnClick () {
+	if(webix.isUndefined($$('coursesview'))){
+		$$('mainpage').addView({id:"coursesview", rows:[webix.copy(coursestable.getCoursesTable()),webix.copy(coursestable.getCoursesMenu())]});
+		$$('mainpage').resize(true);
+		$$('coursestable').refresh();
+	}
+	$$('coursesview').show();		
+};
+
+function reportsOnClick () {
+	if(webix.isUndefined($$('reportsview'))){
+		$$('mainpage').addView({id:"reportsview", rows:[webix.copy(reportstable.getReportsTable()),webix.copy(reportstable.getReportsMenu())]});
+		$$('mainpage').resize(true);
+		$$('reportstable').refresh();
+	}
+	$$('reportsview').show();		
 };
 
 
